@@ -1,10 +1,8 @@
 import java.text.MessageFormat;
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class GUI {
     private TransactionRepository repository;

@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.UUID;
 
 public interface IRepository<T> {
     void add(T t);
