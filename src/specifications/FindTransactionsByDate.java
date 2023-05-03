@@ -1,13 +1,13 @@
 package specifications;
 
-import specifications.ISpecification;
+import model.Transaction;
 
 import java.time.LocalDate;
 
 public class FindTransactionsByDate implements ISpecification<Transaction> {
 
-    private LocalDate initDate;
-    private LocalDate endDate;
+    private final LocalDate initDate;
+    private final LocalDate endDate;
 
     public FindTransactionsByDate(LocalDate initDate, LocalDate endDate){
         this.initDate = initDate;

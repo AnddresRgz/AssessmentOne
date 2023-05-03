@@ -5,13 +5,13 @@ import model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionStorage {
+public final class TransactionStorage {
 
     private List<Transaction> transactions;
 
     private static TransactionStorage instance;
 
-    private TransactionStorage(){
+    private TransactionStorage() {
         transactions = new ArrayList<>();
     }
 
@@ -25,7 +25,8 @@ public class TransactionStorage {
     public List<Transaction> getTransactions(){
         return transactions;
     }
-    public void setTransactions(List<Transaction> transactions) {
+
+    public void setTransactions(List<Transaction> transactions){
         this.transactions = transactions;
     }
 }

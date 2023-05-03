@@ -1,9 +1,10 @@
 package model;
 
 import java.text.MessageFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,8 +46,11 @@ public class TransactionReport {
         LocalDate initDate = LocalDate.of(date.getYear(), date.getMonth(), 1);
         LocalDate endDate = LocalDate.of(date.getYear(), date.getMonth().plus(1), 1 );
         List<LocalDate> dates =  initDate.datesUntil(endDate).
-                filter(x -> x.getDayOfMonth() == 1 || x.getDayOfMonth() == date.lengthOfMonth() ||
-                        x.getDayOfWeek().getValue() == Calendar.MONDAY || x.getDayOfWeek().getValue() == Calendar.SUNDAY)
+                filter(x ->
+                        (x.equals(date.with(TemporalAdjusters.firstDayOfMonth()))  ||
+                        (x.equals(date.with(TemporalAdjusters.lastDayOfMonth()))) ||
+                        x.getDayOfWeek() == DayOfWeek.MONDAY ||
+                        x.getDayOfWeek() == DayOfWeek.SUNDAY))
                 .collect(Collectors.toList() );
         List<TransactionReport> reports = new ArrayList<>();
         for(int i = 0; i < dates.size(); i= i+2){
@@ -57,6 +61,7 @@ public class TransactionReport {
 
     @Override
     public String toString() {
-        return MessageFormat.format("Init Date: {0} - End Date: {1} - Quantity: {2}", getInitDate(), getEndDate(), getQuantity());
+        return MessageFormat.format("Init Date: {0} - End Date: {1} - Quantity: {2}",
+                getInitDate(), getEndDate(), getQuantity());
     }
 }

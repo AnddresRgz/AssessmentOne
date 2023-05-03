@@ -14,46 +14,49 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class GUI {
-    private TransactionRepository repository;
-    private Scanner sc;
-
+    private final TransactionRepository repository;
+    private final Scanner sc;
     public GUI(TransactionRepository repository){
         this.repository = repository;
-        sc = new Scanner(System.in).useDelimiter("\n");
+        sc = new Scanner(System.in).useDelimiter(Constants.GUI_DELIMITER);
     }
 
     public void start(){
-        int val = 0;
-        String desc;
-        double amount;
+        int opt = 0;
+        UUID transactionId;
         int userId;
         LocalDate createDate;
-        UUID transactionId;
+        double amount;
+        String desc;
         do{
             showOptions();
-            val = sc.nextInt();
-            switch(val){
+            opt = sc.nextInt();
+            switch(opt){
                 case 1:
-                    System.out.println("Type data in next order: Description, Amount, User ID, Create date(yyyy-mm-dd).");
+                    System.out.println("Enter description:");
                     desc = sc.next();
+                    System.out.println("Enter amount:");
                     amount = sc.nextDouble();
+                    System.out.println("Enter user ID:");
                     userId = sc.nextInt();
+                    System.out.println("Enter create date (yyyy-mm-dd):");
                     createDate = LocalDate.parse(sc.next());
-                    add(desc,amount,userId,createDate);
+                    add(desc, amount, userId, createDate);
                     break;
                 case 2:
-                    System.out.println("Type data in next order: model.Transaction ID, User ID.");
+                    System.out.println("Enter transaction ID:");
                     transactionId = UUID.fromString(sc.next());
+                    System.out.println("Enter user ID:");
                     userId = sc.nextInt();
                     verifyTransaction(transactionId, userId);
                     break;
                 case 3:
-                    System.out.println("Type data in next order: User ID.");
+                    System.out.println("Enter user ID:");
                     userId = sc.nextInt();
                     showAllTransactionsByUser(userId);
                     break;
                 case 4:
-                    System.out.println("Type data in next order: User ID.");
+                    System.out.println("Enter user ID:");
                     userId = sc.nextInt();
                     showSum(userId);
                     break;
@@ -72,7 +75,8 @@ public class GUI {
                     System.out.println("Chosen option doesn't exist. Choose a valid one.");
             }
 
-        }while (val != 7);
+        }while (opt != 7);
+        sc.close();
     }
 
     private void add(String desc, double amount, int userId, LocalDate createDate){
@@ -82,7 +86,7 @@ public class GUI {
     private void verifyTransaction(UUID transactionId, int userId){
         Transaction transaction = repository.getTransactionBy(new FindTransactionByUserId(transactionId, userId));
         if( transaction == null ){
-            System.out.println("model.Transaction not found");
+            System.out.println("Transaction not found");
         }else{
             System.out.println(transaction.toString());
         }

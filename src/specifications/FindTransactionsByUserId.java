@@ -1,10 +1,11 @@
 package specifications;
 
-import specifications.ISpecification;
+
+import model.Transaction;
 
 public class FindTransactionsByUserId implements ISpecification<Transaction> {
 
-    private int userId;
+    private final int userId;
 
     public FindTransactionsByUserId(int userId){
         this.userId = userId;

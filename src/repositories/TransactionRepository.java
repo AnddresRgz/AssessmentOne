@@ -1,6 +1,5 @@
 package repositories;
 
-import repositories.IRepository;
 import specifications.ISpecification;
 import model.Transaction;
 
@@ -10,7 +9,8 @@ import java.util.stream.Collectors;
 
 public class TransactionRepository implements IRepository<Transaction> {
 
-    private List<Transaction> transactions;
+    private final List<Transaction> transactions;
+    private final Random random = new Random();
 
     public TransactionRepository(List<Transaction> transactions){
         this.transactions = transactions;
@@ -26,30 +26,29 @@ public class TransactionRepository implements IRepository<Transaction> {
         return transactions;
     }
 
-    public Transaction getTransactionBy(ISpecification spec){
-        return transactions.stream().filter(x -> spec.isExists(x)).findAny().orElse(null);
+    public Transaction getTransactionBy(ISpecification<Transaction> spec){
+        return transactions.stream()
+                .filter(spec::isExists)
+                .findFirst()
+                .orElse(null);
     }
 
-    public List<Transaction> getAllTransactionsBy(ISpecification spec){
-        return transactions.stream().filter(x -> spec.isExists(x)).collect(Collectors.toList());
+    public List<Transaction> getAllTransactionsBy(ISpecification<Transaction> spec){
+        return transactions.stream()
+                .filter(spec::isExists)
+                .collect(Collectors.toList());
     }
 
-    public double getTransactionsSum(ISpecification spec){
-        return transactions.stream().filter(x -> spec.isExists(x))
-                .map(x -> x.getAmount()).collect(Collectors.summingDouble(Double::doubleValue));
+    public double getTransactionsSum(ISpecification<Transaction> spec){
+        return transactions.stream()
+                .filter(spec::isExists)
+                .map(Transaction::getAmount)
+                .mapToDouble(Double::doubleValue)
+                .sum();
     }
 
     public Transaction getRandomTransaction(){
-        return transactions.get(new Random().nextInt(transactions.size()));
+        return transactions.get(random.nextInt(transactions.size()));
     }
 
-    @Override
-    public void update(Transaction oldObj, Transaction newObj) {
-
-    }
-
-    @Override
-    public void delete(Transaction transaction) {
-
-    }
 }
