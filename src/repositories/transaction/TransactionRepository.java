@@ -1,8 +1,14 @@
+package repositories.transaction;
+
+import repositories.IRepository;
+import specifications.ISpecification;
+import model.Transaction;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class TransactionRepository implements IRepository<Transaction>{
+public class TransactionRepository implements IRepository<Transaction> {
 
     private List<Transaction> transactions;
 

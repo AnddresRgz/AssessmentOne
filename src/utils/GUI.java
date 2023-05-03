@@ -1,3 +1,12 @@
+package utils;
+
+import specifications.transaction.FindTransactionByUserId;
+import specifications.transaction.FindTransactionsByDate;
+import specifications.transaction.FindTransactionsByUserId;
+import model.Transaction;
+import model.TransactionReport;
+import repositories.transaction.TransactionRepository;
+
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +42,7 @@ public class GUI {
                     add(desc,amount,userId,createDate);
                     break;
                 case 2:
-                    System.out.println("Type data in next order: Transaction ID, User ID.");
+                    System.out.println("Type data in next order: model.Transaction ID, User ID.");
                     transactionId = UUID.fromString(sc.next());
                     userId = sc.nextInt();
                     verifyTransaction(transactionId, userId);
@@ -73,7 +82,7 @@ public class GUI {
     private void verifyTransaction(UUID transactionId, int userId){
         Transaction transaction = repository.getTransactionBy(new FindTransactionByUserId(transactionId, userId));
         if( transaction == null ){
-            System.out.println("Transaction not found");
+            System.out.println("model.Transaction not found");
         }else{
             System.out.println(transaction.toString());
         }
@@ -102,7 +111,7 @@ public class GUI {
     }
 
     private void showOptions(){
-        System.out.println("1- Create Transaction.\n2.- Verify user transaction.\n3.- Show all transactions from user." +
+        System.out.println("1- Create model.Transaction.\n2.- Verify user transaction.\n3.- Show all transactions from user." +
                 "\n4.- Show user total sales amount.\n5.- Get random transaction.\n6.- Show monthly report.\n7.- Exit ");
     }
 

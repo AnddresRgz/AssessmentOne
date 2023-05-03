@@ -1,3 +1,7 @@
+package specifications.transaction;
+
+import specifications.ISpecification;
+
 public class FindTransactionsByUserId implements ISpecification<Transaction> {
 
     private int userId;

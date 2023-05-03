@@ -1,3 +1,7 @@
+package specifications.transaction;
+
+import specifications.ISpecification;
+
 import java.time.LocalDate;
 
 public class FindTransactionsByDate implements ISpecification<Transaction> {

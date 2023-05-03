@@ -1,3 +1,5 @@
+package model;
+
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;

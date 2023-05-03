@@ -1,3 +1,7 @@
+package specifications.transaction;
+
+import specifications.ISpecification;
+
 import java.util.UUID;
 
 public class FindTransactionByUserId implements ISpecification<Transaction> {
