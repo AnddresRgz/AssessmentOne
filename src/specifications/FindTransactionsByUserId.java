@@ -1,4 +1,4 @@
-package specifications.transaction;
+package specifications;
 
 import specifications.ISpecification;
 

@@ -1,4 +1,4 @@
-package repositories.transaction;
+package repositories;
 
 import repositories.IRepository;
 import specifications.ISpecification;

@@ -1,11 +1,11 @@
 package utils;
 
-import specifications.transaction.FindTransactionByUserId;
-import specifications.transaction.FindTransactionsByDate;
-import specifications.transaction.FindTransactionsByUserId;
+import specifications.FindTransactionByUserId;
+import specifications.FindTransactionsByDate;
+import specifications.FindTransactionsByUserId;
 import model.Transaction;
 import model.TransactionReport;
-import repositories.transaction.TransactionRepository;
+import repositories.TransactionRepository;
 
 import java.text.MessageFormat;
 import java.time.LocalDate;

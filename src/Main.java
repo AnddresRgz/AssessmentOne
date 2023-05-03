@@ -1,5 +1,5 @@
 import model.Transaction;
-import repositories.transaction.TransactionRepository;
+import repositories.TransactionRepository;
 import storage.TransactionStorage;
 import utils.GUI;
 
